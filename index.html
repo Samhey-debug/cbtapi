@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot Example</title>
+</head>
+<body>
+<h1>Chatbot Example</h1>
+<div id="chat"></div>
+
+<!-- Include Axios library -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+// Function to send GET request using Axios
+function getChatResponse(userMessage) {
+    const apiUrl = 'http://api.brainshop.ai/get?bid=181113&key=RaxcqPK29y8eEeSA&uid=1&msg=' + encodeURIComponent(userMessage);
+    
+    axios.get(apiUrl)
+        .then(response => {
+            // Display the chatbot response
+            document.getElementById('chat').innerHTML += `<p>User: ${userMessage}</p>`;
+            document.getElementById('chat').innerHTML += `<p>Chatbot: ${response.data.cnt}</p>`;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Example usage
+getChatResponse("Hello, how are you?");
+</script>
+</body>
+</html>
